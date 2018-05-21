@@ -137,11 +137,11 @@ let compile env code =
       (if p then env, code else let y, env = env#allocate in env, code @ [Mov (eax, y)])
     in
     let getCode = function
-		      | c   -> if (c > 'Z')
-                               then Char.code c - 70
-                               else Char.code c - 64 
-                      | '_' -> 53
-      in
+		    | c   -> if (c > 'Z')
+                             then Char.code c - 70
+                             else Char.code c - 64 
+                    | '_' -> 53
+    in
     match scode with
     | [] -> env, []
     | instr :: scode' ->
@@ -264,7 +264,7 @@ let compile env code =
           | CALL (f, n, p) -> call env f n p
           | SEXP (t, n)    -> let reprSexp s = 
                                 let tagL = String.length s in
-		                let srt  = String.sub s 0 (min tagL 5) in
+                                let srt  = String.sub s 0 (min tagL 5) in
 		                let rec reprTag tg l br k = if (l > k) 
                                                             then br else
                                                             reprTag tg l ((br lsl 6) lor 
